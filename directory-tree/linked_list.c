@@ -39,3 +39,17 @@ LL_Node* AddLast(LL_Node* head, LL_Node* nodeToAdd) {
     temp->next = nodeToAdd;
     return head;
 }
+
+// Remove the first element of specified linked list 
+LL_Node* RemoveFirst(LL_Node* head) {
+    if (head == NULL || head->next == NULL) return NULL;
+    LL_Node* tmp = head->next;
+    DestroyTreeNode(head->data);
+    free(head);
+    return tmp;
+}
+
+// Checks if the specified linked list is empty
+int IsEmpty(LL_Node* head){
+    return head == NULL;
+}
