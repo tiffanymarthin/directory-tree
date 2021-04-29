@@ -25,3 +25,17 @@ LL_Node* AddFirst(LL_Node* head, LL_Node* nodeToAdd) {
     return nodeToAdd;
 }
 
+// Add specified node to the end of specified linked list
+LL_Node* AddLast(LL_Node* head, LL_Node* nodeToAdd) {
+    if (head == NULL) {
+        return nodeToAdd;
+    }
+
+    LL_Node* temp = head;
+    while (temp->next != NULL){
+        temp = temp->next;
+    }
+
+    temp->next = nodeToAdd;
+    return head;
+}
