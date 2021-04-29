@@ -33,7 +33,7 @@ LL_Node* AddLast(LL_Node* head, LL_Node* nodeToAdd);
 LL_Node* RemoveFirst(LL_Node* head);
 
 // Checks if linked list node is empty
-int isEmpty(LL_Node* nodes);
+int isEmpty(LL_Node* head);
 
 
 #endif
