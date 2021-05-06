@@ -25,3 +25,26 @@ typedef struct tree Tree;
 struct tree{
       TreeNode* root;
 };
+
+/****** Tree Implementation ******/
+
+// Create a tree with specified tree node as root
+Tree* CreateTree(TreeNode* root);
+
+// Destroy specified tree
+void DestroyTree(TreeNode* root);
+
+/****** Tree node Implementation ******/
+// Create a tree node, using specified path and name
+TreeNode* CreateTreeNode(char* path, char* name);
+
+// Add a child to the specified tree node
+void AddChild(TreeNode* root, TreeNode* nodeToAdd);
+
+// Destroy specified tree node
+void DestroyTreeNode(TreeNode* root);
+
+// Print the specified tree
+void PrintTree(TreeNode* root);
+
+#endif
