@@ -54,3 +54,35 @@ void DestroyTree(TreeNode* root) {
     }
     free(q);
 }
+
+/****** Tree Node Implementation ******/
+ 
+// Create a tree node using specified path and name
+TreeNode* CreateTreeNode(char* path, char* name) {
+    TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
+    newNode->path = path;
+    newNode->name = name;
+
+    newNode->children = NULL;
+    newNode->siblings = NULL;
+    newNode->level = 0;
+    return newNode;
+}
+
+// Add specified node as the node's child
+void AddChild(TreeNode* root, TreeNode* nodeToAdd) {
+    TreeNode* temp = root->children;
+    int root_level = root->level;
+
+    if (root->children == NULL) {
+        root->children = nodeToAdd;
+        root->children->level = root_level + 1;
+    } else {
+        int root_level = root->level;
+        while (temp->siblings != NULL) {
+            temp = temp->siblings;
+        }
+        temp->siblings = nodeToAdd;
+        temp->siblings->level = root_level + 1;
+    }
+}
