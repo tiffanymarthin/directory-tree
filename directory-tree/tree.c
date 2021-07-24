@@ -59,9 +59,10 @@ void DestroyTree(TreeNode *root)
             }
             // Root node does not put path and name in heap
             if (node->level > 0)
+            {
                 free(node->path);
-            if (node->level > 0)
                 free(node->name);
+            }
             free(node);
         }
     }
@@ -86,23 +87,22 @@ TreeNode *CreateTreeNode(char *path, char *name)
 // Add specified node as the root's child
 void AddChild(TreeNode *root, TreeNode *nodeToAdd)
 {
-    TreeNode *temp = root->children;
     int root_level = root->level;
+    nodeToAdd->level = root_level + 1;
 
     if (root->children == NULL)
     {
         root->children = nodeToAdd;
-        root->children->level = root_level + 1;
+        // root->children->level = root_level + 1;
     }
     else
     {
-        int root_level = root->level;
+        TreeNode *temp = root->children;
         while (temp->siblings != NULL)
         {
             temp = temp->siblings;
         }
         temp->siblings = nodeToAdd;
-        temp->siblings->level = root_level + 1;
     }
 }
 
