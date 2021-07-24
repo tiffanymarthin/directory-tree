@@ -106,6 +106,7 @@ void AddChild(TreeNode *root, TreeNode *nodeToAdd)
     }
 }
 
+// Destroy specified TreeNode
 void DestroyTreeNode(TreeNode *node)
 {
     if (node == NULL)
@@ -115,4 +116,83 @@ void DestroyTreeNode(TreeNode *node)
     free(node->path);
     free(node->name);
     free(node);
+}
+
+// Color helper functions to print tree in colors
+void pink()
+{
+    printf("\033[1;95m");
+}
+
+void green()
+{
+    printf("\033[1;32m");
+}
+
+void reset()
+{
+    printf("\033[0m");
+}
+/*
+ * PrintTree function uses simple formatting
+ * with indentations and colors
+ * TODO: improve visuals using unicode printing
+ */
+
+void PrintTree(TreeNode *root)
+{
+    if (root == NULL)
+    {
+        printf("Tree is empty");
+        exit(1);
+    }
+
+    Stack *tmp_stack = CreateStack();
+    TreeNode *curr = root;
+
+    while (tmp_stack->top != NULL || curr != NULL)
+    {
+        if (curr != NULL)
+        {
+            Push(tmp_stack, curr);
+            int dash_ct = curr->level;
+            if (curr->level == 0)
+                printf(".\n");
+            else
+            {
+                printf("|");
+                while (dash_ct > 0)
+                {
+                    printf("--");
+                    dash_ct--;
+                }
+                // Print with different colors according to file types
+                // For folders, use green
+                if (curr->children != NULL)
+                {
+                    green();
+                    printf(" %s\n", curr->name);
+                    reset();
+                    // For files with no .c, use pink
+                }
+                else if (strchr(curr->name, '.') == NULL)
+                {
+                    pink();
+                    printf(" %s\n", curr->name);
+                    reset();
+                }
+                else
+                {
+                    printf(" %s\n", curr->name);
+                }
+            }
+            curr = curr->children;
+        }
+        else
+        {
+            TreeNode *node = Pop(tmp_stack);
+            curr = node->siblings;
+        }
+    }
+    free(tmp_stack);
 }
