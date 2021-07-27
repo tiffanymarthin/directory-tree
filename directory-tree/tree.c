@@ -149,27 +149,63 @@ void PrintTree(TreeNode *root)
 
     Stack *tmp_stack = CreateStack();
     TreeNode *curr = root;
+    int siblingArr[100];
 
     while (tmp_stack->top != NULL || curr != NULL)
     {
         if (curr != NULL)
         {
             Push(tmp_stack, curr);
-            int dash_ct = curr->level;
+            int dash_ct = curr->level - 1;
+
+            if (curr->siblings != NULL)
+            {
+                siblingArr[curr->level] = 1;
+            }
+            // else
+            // {
+            //     siblingArr[dash_ct] = 0;
+            // }
+            // printf("l: %d", curr->level);
+
             if (curr->level == 0)
+            {
                 printf(".\n");
+            }
             else
             {
-                printf("|");
-                while (dash_ct > 0)
+                // printf("|");
+                while (dash_ct > 0 && curr->level > 1)
                 {
-                    printf("--");
+                    if (siblingArr[curr->level - dash_ct] == 1)
+                    {
+                        // printf("%d ", dash_ct);
+                        printf("%lc", 0x2502);
+                    }
+                    else
+                    {
+                        printf(" ");
+                    }
+                    // printf("%d", curr->level);
+                    // printf("%d", dash_ct);
+                    // printf("%d", siblingArr[curr->level - dash_ct]);
+                    // printf("--");
+                    printf("   ");
                     dash_ct--;
                 }
                 // Print with different colors according to file types
                 // For folders, use green
                 if (curr->children != NULL)
                 {
+                    if (curr->siblings == NULL)
+                    {
+                        printf("%lc%lc%lc", 0x2514, 0x2500, 0x2500);
+                        siblingArr[curr->level] = 0;
+                    }
+                    else
+                    {
+                        printf("%lc%lc%lc", 0x251d, 0x2500, 0x2500);
+                    }
                     green();
                     printf(" %s\n", curr->name);
                     reset();
@@ -177,12 +213,30 @@ void PrintTree(TreeNode *root)
                 }
                 else if (strchr(curr->name, '.') == NULL)
                 {
+                    if (curr->siblings == NULL)
+                    {
+                        printf("%lc%lc%lc", 0x2514, 0x2500, 0x2500);
+                        siblingArr[curr->level] = 0;
+                    }
+                    else
+                    {
+                        printf("%lc%lc%lc", 0x251d, 0x2500, 0x2500);
+                    }
                     pink();
                     printf(" %s\n", curr->name);
                     reset();
                 }
                 else
                 {
+                    if (curr->siblings == NULL)
+                    {
+                        printf("%lc%lc%lc", 0x2514, 0x2500, 0x2500);
+                        siblingArr[curr->level] = 0;
+                    }
+                    else
+                    {
+                        printf("%lc%lc%lc", 0x251d, 0x2500, 0x2500);
+                    }
                     printf(" %s\n", curr->name);
                 }
             }
