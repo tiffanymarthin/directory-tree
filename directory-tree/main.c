@@ -22,13 +22,17 @@ int main()
 {
     char *dir = ".";
     TreeNode *rootNode = CreateTreeNode(dir, "");
-    BuildDirectoryTree(rootNode);
+    int *dir_ct = (int *)malloc(sizeof(int));
+    int *file_ct = (int *)malloc(sizeof(int));
+    BuildDirectoryTree(rootNode, dir_ct, file_ct);
 
     // Print the tree and the stats
     PrintTree(rootNode);
-    // PrintDirectoryCounts(dir_ct, file_ct);
+    PrintDirectoryCounts(dir_ct, file_ct);
 
     DestroyTree(rootNode);
+    free(dir_ct);
+    free(file_ct);
 
     return 0;
 }

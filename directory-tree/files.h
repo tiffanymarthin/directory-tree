@@ -10,8 +10,8 @@
 #include "queue.h"
 
 // Helper function to print the directory file and folder counts
-void PrintDirectoryCounts(int directory_count, int file_count);
+void PrintDirectoryCounts(int *directory_count, int *file_count);
 
-void BuildDirectoryTree(TreeNode *rootNode);
+void BuildDirectoryTree(TreeNode *rootNode, int *dir_ct, int *file_ct);
 
 #endif

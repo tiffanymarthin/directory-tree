@@ -9,15 +9,17 @@
 #include "files.h"
 
 // Helper function to print the directory file and folder counts
-void PrintDirectoryCounts(int directory_count, int file_count)
+void PrintDirectoryCounts(int *directory_count, int *file_count)
 {
-    printf("\n%d ", directory_count);
-    (directory_count > 1) ? printf("directories, ") : printf("directory, ");
-    printf("%d ", file_count);
-    (file_count > 1) ? printf("files\n") : printf("file\n");
+    int dir_ct = *directory_count;
+    int file_ct = *file_count;
+    printf("\n%d ", dir_ct);
+    (dir_ct > 1) ? printf("directories, ") : printf("directory, ");
+    printf("%d ", file_ct);
+    (file_ct > 1) ? printf("files\n") : printf("file\n");
 }
 
-void BuildDirectoryTree(TreeNode *rootNode)
+void BuildDirectoryTree(TreeNode *rootNode, int *dir_ct_var, int *file_ct_var)
 {
     // Starts from the current directory
     char *dir;
@@ -126,4 +128,6 @@ void BuildDirectoryTree(TreeNode *rootNode)
         free(namelist);
     }
     free(q);
+    *dir_ct_var = dir_ct;
+    *file_ct_var = file_ct;
 }
