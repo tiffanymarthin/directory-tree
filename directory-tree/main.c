@@ -27,6 +27,7 @@ int main()
     BuildDirectoryTree(rootNode, dir_ct, file_ct);
 
     // Print the tree and the stats
+    setlocale(LC_ALL, "");
     PrintTree(rootNode);
     PrintDirectoryCounts(dir_ct, file_ct);
 
