@@ -10,12 +10,13 @@ This project is an example of how N-ary tree traversals could be useful.
 * Run `treedir` from any directory
 
 ### Option 2
-* Make C compiler (gcc) is installed
+* Make sure C compiler (gcc) is installed
 * Git clone the repo
 * Type `make` (see Makefile for more details)
-* Copy 'treedir' executable file from the repo to your /bin/ folder (need admin access)
+* Copy 'treedir' executable file from the repo to your `/bin/` folder (need admin access)
 `sudo cp treedir /usr/local/bin`
 * Run `treedir` from any directory
+* Run `make clean` to delete the executable file in the folder
 
 ## Sample Output
 * Green: Folder
